@@ -1,5 +1,5 @@
 <template>
-   <div class="footer-wrapper">Đây là footer</div> 
+   <div class="footer-wrapper"></div> 
 </template>
 
 <script>

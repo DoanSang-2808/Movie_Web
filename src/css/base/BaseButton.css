@@ -1,0 +1,11 @@
+.button-wrapper{
+    height: 40px;
+    
+}
+.btn{
+    height: 100%;
+    width: max-content;
+    margin: 0 16px;
+    color: #fff;
+    border-radius: 4px;
+}

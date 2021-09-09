@@ -1,5 +1,8 @@
 <template>
-   <div class="main-wrapper">Đây là main</div> 
+   <div class="main-wrapper">
+
+       
+    </div> 
 </template>
 
 <script>

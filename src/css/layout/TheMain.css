@@ -1,0 +1,12 @@
+@media only screen and (max-width: 1024px){
+    .main-wrapper{
+        height: 100%;
+        width: calc(100% - 1.6rem);
+        margin: 3rem .8rem;  
+    }
+}
+.main-wrapper{
+    height: 100%;
+    width: 100%;
+    margin: 3rem 0;
+}
