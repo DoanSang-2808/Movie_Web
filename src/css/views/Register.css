@@ -1,0 +1,106 @@
+.register-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    height: calc(100% - 56px)
+}
+.register-content{
+    width: 450px;
+    height: 500px;
+    padding: 60px 68px 40px 68px;
+    background-color: black;
+    opacity: 0.7;
+}
+@media only screen and (max-width : 450px) {
+    .register-content{
+        width: 100%;
+        height: 100%;
+        padding: 60px 68px 40px 68px;
+        background-color: black;
+        opacity: 0.7;
+    }
+}
+.register-content-form-main{
+    width: 100%;
+    height: 344px;
+}
+.register-content-form-main h3{
+    margin-bottom: 28px;
+    font-size: 32;
+    font-weight: 700px !important;
+    text-align: left !important;
+}
+.register-form-user{
+    padding-bottom: 16px;
+}  
+.input{
+   height: 50px;
+   background-color: #000; 
+   width: 100%;
+   color: #fff;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   padding-left: 10px
+} 
+.register-form-pass{
+    padding-bottom: 16px;
+}
+input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;  
+    background-color: #000 !important; 
+    color: #fff !important;
+}
+::placeholder{
+    color: #fff;
+} 
+.register-form-option{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+.register-form-option p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+.register-form-option input{
+    height: 16px;
+    width: 16px;
+    margin-right: 10px;
+}
+.btn-login{
+    width: 100% !important;
+    margin: 0 !important;
+}
+.register-content-form-other{
+    width: 100%;
+    height: calc(100% - 344px);
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+.register-content-form-other p{
+    margin-bottom: 0px;
+    color: #ccc;
+    margin-right: 10px;
+}
+.register-content-form-other  a{
+    color: #fff;
+    text-decoration: none;
+
+}
+.register-content-form-other a:hover{
+    color: #fff;
+    text-decoration-line: underline ;
+    cursor: pointer;
+}

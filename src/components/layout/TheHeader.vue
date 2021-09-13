@@ -17,7 +17,7 @@
                </div>
                <div class="col col-sm-3 col-xl-6 ">
                    <div class="height100" style="display: flex; flex-direction: row-reverse; align-items: center">
-                       <Button btnText="Đăng nhập" btnColor="#cf2122"/>
+                       <Button btnText="Đăng nhập" btnColor="#cf2122" />
                    </div>
                </div>
            </div>
