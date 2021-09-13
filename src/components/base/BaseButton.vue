@@ -1,6 +1,6 @@
 <template>
-    <div class="button-wrapper">
-        <button class="btn" :style="{'background-color': btnColor}"> {{btnText}}</button>
+    <div class="button-wrapper button-wrapper-login">
+        <button class="btn btn-login" :style="{'background-color': btnColor}"> {{btnText}}</button>
     </div>
 </template>
 

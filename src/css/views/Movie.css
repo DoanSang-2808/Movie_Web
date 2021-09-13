@@ -1,0 +1,11 @@
+#app{
+    background-image: url('../../assets/img/background-login.jpg');
+}
+.movie-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    height: calc(100% - 56px)
+}
