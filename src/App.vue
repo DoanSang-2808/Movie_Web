@@ -7,15 +7,17 @@
 </template>
 
 <script>
-import TheHeader from './components/layout/TheHeader.vue'
-import TheMain from './components/layout/TheMain.vue'
-import TheFooter from './components/layout/TheFooter.vue'
+import TheHeader from "./components/layout/TheHeader.vue";
+import TheMain from "./components/layout/TheMain.vue";
+import TheFooter from "./components/layout/TheFooter.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    TheHeader, TheMain, TheFooter
-  }
-}
+    TheHeader,
+    TheMain,
+    TheFooter,
+  },
+};
 </script>
 
 <style>
@@ -24,7 +26,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: #06121e;
+  background-color: #05101b;
   color: #fff;
   /* width: 100vw;  */
 }
