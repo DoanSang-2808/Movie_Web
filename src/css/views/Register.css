@@ -42,13 +42,23 @@
    color: #fff;
    border: 1px solid #ccc;
    border-radius: 4px;
-   padding-left: 10px
+   padding-left: 10px;
+   display: flex;
+   align-items: center;   
 } 
+.input .bi{
+    display: none;
+}
+.input .error{
+    display: block;
+    color: red;
+    margin: 0 10px;
+}
 .register-form-pass{
     padding-bottom: 16px;
 }
 input{
-    width: 100%;
+    width: 90% ;
     height: 100%;
     border: none;
     outline: none;  

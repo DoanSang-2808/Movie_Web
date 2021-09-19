@@ -1,14 +1,13 @@
 <template>
-   <div class="footer-wrapper"></div> 
+  <div class="footer-wrapper"></div>
 </template>
 
 <script>
-
 export default {
-    name: "TheFooter",
-}
+  name: "TheFooter",
+};
 </script>
 
 <style scoped>
-@import url('../../css/layout/TheFooter.css');
+@import url("../../css/layout/TheFooter.css");
 </style>

@@ -5,6 +5,7 @@
     top: 0;
     left: 0;
     z-index: 2;
+    background-color: #39136A;
 }
 .height100{
     height: 100%;
@@ -21,7 +22,7 @@
 span{
     margin: 10px;
 }
-.col-md-2:hover,.col-md-3:hover{
+.hover:hover{
     color: #428bca;
     background-color: #365068
 }
