@@ -27,7 +27,7 @@
             "
           >
             <router-link to="/login">
-            <Button btnText="Đăng nhập" btnColor="#cf2122" />
+            <Button :btnText=hasLogin btnColor="#cf2122" />
             </router-link>
           </div>
         </div>
@@ -42,6 +42,14 @@ export default {
   name: "TheHeader",
   components: {
     Button,
+  },
+  computed: {
+    hasLogin(){
+      if(this.$store.state.isShow == true){
+        return "Đăng xuất"
+      }
+      return "Đăng nhập"
+    }
   },
 };
 </script>

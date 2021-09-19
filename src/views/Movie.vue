@@ -1,11 +1,11 @@
 <template>
   <div class="movie-wrapper">
-    <div class="content">
+    <div class="content" :class="{hasNotLogin: isShow }">
       <h1><b>Các bộ phim lẻ mới nhất, được cập nhật liên tục</b></h1>
       <h3>Xem ở mọi nơi. Hủy bất kì lúc nào !</h3>
       <h6>Bạn đã sẵn sàng chưa ?</h6>
     </div>
-    <div class="content-main">
+    <div class="content-main" :class="{hasLogin: isShow }" >
       <div class="filter-wrapper">
         <div class="container-fluid">
           <div class="row">
@@ -184,8 +184,7 @@
       <paginate style="margin-top: 2rem;"
         :page-count="10"
         :page-range="3"
-        :margin-pages="2"
-        :click-handler="clickCallback"
+        :margin-pages="2" 
         :prev-text="'Trang trước'"
         :next-text="'Trang sau'"
         :container-class="'pagination'"
@@ -204,15 +203,27 @@
 <script>
 export default {
   name: "Movie",
+  data(){
+    return {
+    }
+  },
+  created(){
+    
+  },
+  computed: {
+    isShow(){
+      return this.$store.state.isShow;
+    }
+  }, 
+  methods: {
+    
+  }, 
+  
 };
 </script>
 
 <style>
 @import url("../css/views/Movie.css");
-#app {
-  background-image: none;
-  /* background-image: url('../assets/img/background-login.jpg'); */
-}
 .page-item{
   border: 1px solid #ccc;
   width: 2rem;

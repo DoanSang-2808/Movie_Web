@@ -1,16 +1,24 @@
 .movie-wrapper{
     width: 100%;
+    height: calc(100% - 56px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 3rem .8rem;
 }
 .content{
-    display: none;
+    /* display: none; */
     font-weight: 900;
 }
+.hasNotLogin{
+    display: none;
+}
 .content-main{
+    display: none;
     width: 990px;
+}
+.hasLogin{
+    display: block;
 }
 .filter-wrapper{
     width: 100%;
