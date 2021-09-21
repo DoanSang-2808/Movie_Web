@@ -1,0 +1,19 @@
+.wrapper-footer{
+    width: 100%
+}
+.footer{
+    width: 100%;
+    padding: 3rem 5rem;
+}
+.footer p{
+    text-align: left;
+    color: #ccc;
+
+}
+.footer p:hover{
+    text-decoration-line:underline;
+    cursor: pointer;
+}
+.footer .row p{
+    font-size: 14px;
+}

@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     /**
-     * Hàm bắt sự kiện khi click vào button Dăng nhập trong form
+     * Hàm bắt sự kiện khi click vào button Đăng nhập trong form
      * Author: DTSang(19/09)
      */
     btnLoginOnclick() {
@@ -111,7 +111,7 @@ export default {
           let value = this.account;
           let self = this;
           axios
-            .post("http://localhost:3500/login", value)
+            .post("https://apiwebmovie.herokuapp.com/login", value)
             .then((response) => {
               console.log(response);
               self.$toast("Đăng nhập thành công", {
@@ -130,6 +130,10 @@ export default {
         }
       });
     },
+    /**
+     * Hàm thay dổi giá trị của isShow trong store
+     * Ảthor: DTSang(19/09)
+     */
     changeIsShow(){
       this.$store.dispatch('handleChangeIsShow', true)
     },

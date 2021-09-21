@@ -1,6 +1,7 @@
 <template>
   <div class="button-wrapper button-wrapper-login" @click="btnOnclick">
     <button class="btn btn-login" :style="{ 'background-color': btnColor }">
+      <i :class="icon" :style="{'margin-right': marginRight}" ></i>
       {{ btnText }}
     </button>
   </div>
@@ -18,6 +19,12 @@ export default {
     },
     btnMode: {
       type: Number,
+    },
+    icon: {
+      type: String,
+    },
+    marginRight: {
+      type: String,
     }
   },
   methods: {
