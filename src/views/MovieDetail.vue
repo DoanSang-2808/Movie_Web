@@ -6,12 +6,7 @@
         <div class="movie-detail-main row">
           <div class="col-6 col-md-3" style="z-index: 1">
             <img src="../assets/img/img-movie.jpg" alt="" />
-            <Button
-              btnText="Xem phim"
-              btnColor="#cf2122"
-              icon="bi bi-play-fill"
-              marginRight="1rem"
-            />
+            <Button btnText="Xem phim" icon="bi bi-play-fill margin-right" />
           </div>
           <div class="col-md-9 main" style="z-index: 1">
             <h1 class="title">The Witcher: Nightmare of the Wolf</h1>

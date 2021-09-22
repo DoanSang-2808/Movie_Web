@@ -25,7 +25,7 @@
                     type="text"
                     name="email"
                     placeholder="Email hoặc số điện thoại"
-                    v-model="email"
+                    v-model="account.email"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -52,7 +52,7 @@
                     type="password"
                     name="password"
                     placeholder="Mật khẩu"
-                    v-model="password"
+                    v-model="account.password"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -64,7 +64,6 @@
             <div class="login-form-login">
               <Button
                 btnText="Đăng nhập"
-                btnColor="#cf2122"
                 :btnMode="0"
                 @btnLoginOnclick="btnLoginOnclick"
               />
@@ -95,8 +94,6 @@ export default {
   components: { Button },
   data() {
     return {
-      email: "",
-      password: "",
       account: new Object(),
     };
   },
@@ -111,14 +108,14 @@ export default {
           let value = this.account;
           let self = this;
           axios
-            .post("https://apiwebmovie.herokuapp.com/login", value)
+            .post(`${process.env.VUE_APP_ROOT_API}/login`, value)
             .then((response) => {
               console.log(response);
               self.$toast("Đăng nhập thành công", {
                 timeout: 2000,
               });
-              self.$emit("hasLogin", true)
-              self.$router.push({ name: "Movie"})
+              self.$emit("hasLogin", true);
+              self.$router.push({ name: "Movie" });
               self.changeIsShow();
             })
             .catch((error) => {
@@ -134,24 +131,8 @@ export default {
      * Hàm thay dổi giá trị của isShow trong store
      * Ảthor: DTSang(19/09)
      */
-    changeIsShow(){
-      this.$store.dispatch('handleChangeIsShow', true)
-    },
-  },
-  watch: {
-    /**
-     * Hàm lắng nghe sự thay đổi của email
-     * Auhtor: DTSang(19/09)
-     */
-    email: function () {
-      this.account.email = this.email;
-    },
-    /**
-     * Hàm lắng nghe sự thay đổi password
-     * Author: DTSang(19/09)
-     */
-    password: function () {
-      this.account.password = this.password;
+    changeIsShow() {
+      this.$store.dispatch("handleChangeIsShow", true);
     },
   },
 };

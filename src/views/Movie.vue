@@ -253,7 +253,7 @@ export default {
         // let self = this;
         axios
           .get(
-            `https://apiwebmovie.herokuapp.com/filter?typemovie=${this.typeMovie}&national=${this.nationalMovie}&year=${this.yearMovie}`
+            `${process.env.VUE_APP_ROOT_API}/filter?typemovie=${this.typeMovie}&national=${this.nationalMovie}&year=${this.yearMovie}`
           )
           .then((response) => {
             console.log(response.data);

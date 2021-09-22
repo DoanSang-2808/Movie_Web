@@ -6,8 +6,6 @@
           <div class="container-fluid height100">
             <div class="row height100">
               <router-link to="/" class="col-12 col-sm-6 col-md-3 center">
-                <!-- <i class="bi bi-justify option"></i>
-                <div class="show-option"></div> -->
                 <div class="dropdown">
                   <a
                     class="btn dropdown-css"
@@ -68,7 +66,7 @@
             "
           >
             <router-link to="/login">
-              <Button :btnText="hasLogin" btnColor="#cf2122" />
+              <Button :btnText="hasLogin" />
             </router-link>
           </div>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="footer-wrapper">
-    <div style="width: 100%; height: 10px; background: #222"></div>
+    <div class="up-footer"></div>
     <div class="footer">
       <p style="margin-bottom: 50px">Bạn có câu hỏi? Liên hệ chúng tôi.</p>
       <div class="container">

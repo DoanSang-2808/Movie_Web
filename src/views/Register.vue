@@ -24,7 +24,7 @@
                     name="email"
                     placeholder="Nhập email"
                     autocomplete="on"
-                    v-model="email"
+                    v-model="account.email"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -54,7 +54,7 @@
                     name="username"
                     placeholder="Nhập username"
                     autocomplete="on"
-                    v-model="username"
+                    v-model="account.username"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -81,7 +81,7 @@
                     type="password"
                     name="password"
                     placeholder="Mật khẩu"
-                    v-model="password"
+                    v-model="account.password"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -122,7 +122,6 @@
             <div class="register-form-login">
               <Button
                 btnText="Đăng kí"
-                btnColor="#cf2122"
                 :btnMode="1"
                 @btnRegisterOnclick="btnRegisterOnclick"
               />
@@ -154,9 +153,6 @@ export default {
   components: { Button },
   data() {
     return {
-      email: "",
-      username: "",
-      password: "",
       passwordComfirm: "",
       account: {
         phone: "",
@@ -171,7 +167,7 @@ export default {
     btnRegisterOnclick() {
       this.$refs.form.validate().then((success) => {
         if (success) {
-          if (this.passwordComfirm !== this.password) {
+          if (this.passwordComfirm !== this.account.password) {
             this.$toast("Xác nhận mật khẩu chưa đúng", {
               timeout: 2000,
             });
@@ -179,7 +175,7 @@ export default {
             let value = this.account;
             let self = this;
             axios
-              .post("https://apiwebmovie.herokuapp.com/register", value)
+              .post(`${process.env.VUE_APP_ROOT_API}/register`, value)
               .then((response) => {
                 console.log(response.data);
                 self.$toast("Đăng kí thành công", {
@@ -201,29 +197,6 @@ export default {
           }
         }
       });
-    },
-  },
-  watch: {
-    /**
-     * Hàm lắng nghe sự thay đổi của email
-     * Author: DTSang(18/09)
-     */
-    email: function () {
-      this.account.email = this.email;
-    },
-    /**
-     * Hàm lắng nghe sự thay đổi của username
-     * Author: DTSang(18/09)
-     */
-    username: function () {
-      this.account.username = this.username;
-    },
-    /**
-     * Hàm lắng nghe sự thay đổi của passwords
-     * Author: DTSang(18/09)
-     */
-    password: function () {
-      this.account.password = this.password;
     },
   },
 };
