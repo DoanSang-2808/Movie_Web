@@ -1,6 +1,7 @@
 <template>
   <div class="button-wrapper button-wrapper-login" @click="btnOnclick">
-    <button class="btn btn-login" :style="{ 'background-color': btnColor }">
+    <button class="btn btn-login btn-color-cf2122">
+      <i :class="icon"></i>
       {{ btnText }}
     </button>
   </div>
@@ -13,12 +14,12 @@ export default {
     btnText: {
       type: String,
     },
-    btnColor: {
-      type: String,
-    },
     btnMode: {
       type: Number,
-    }
+    },
+    icon: {
+      type: String,
+    },
   },
   methods: {
     /**
@@ -26,13 +27,12 @@ export default {
      * Author: DTSang(18/09)
      */
     btnOnclick() {
-  
-      if(this.btnMode == 1){
+      if (this.btnMode == 1) {
         this.$emit("btnRegisterOnclick");
-      } else if(this.btnMode == 0){
+      } else if (this.btnMode == 0) {
         this.$emit("btnLoginOnclick");
       }
-    }
+    },
   },
 };
 </script>

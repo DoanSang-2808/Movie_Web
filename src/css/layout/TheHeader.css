@@ -10,6 +10,25 @@
 .height100{
     height: 100%;
 }
+.option {
+    font-size: 30px;
+    display: none;
+    color: #fff;
+}
+.dropdown{
+    height: 56px;
+    width: max-content;
+}
+.dropdown-css{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.dropdown-menu{
+    background-color: rgb(175, 175, 175);
+}
 .logo{
     width: 60%;
     height: 60%;
@@ -25,4 +44,15 @@ span{
 .hover:hover{
     color: #428bca;
     background-color: #365068
+}
+@media only screen and (max-width: 767px) {
+    .hidden{
+        display: none;
+    } 
+    .height100{
+        padding-left: 0 !important;
+    }
+    .option{
+        display: block;
+    }
 }

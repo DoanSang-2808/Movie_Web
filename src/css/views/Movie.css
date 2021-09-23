@@ -96,6 +96,7 @@ h2{
 }
 .item-movie a img{
     width: 100% ;
+    height: 90%;
 }
 .item-movie h3 {
     text-align: left;
