@@ -94,9 +94,13 @@ h2{
 .item-movie{
     padding: .75rem;
 }
-.item-movie a img{
+.item-movie div{
     width: 100% ;
     height: 90%;
+}
+.item-movie div img{
+    width: 100% ;
+    height: 100%;
 }
 .item-movie h3 {
     text-align: left;
