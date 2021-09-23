@@ -94,24 +94,24 @@
               class="col-xs-6 col-sm-6 col-md-3 item-movie"
               v-for="item of listMovie"
               :key="item.id"
-              :id="item.id"
+              :id="item._id"
               @click="movieOnclick(item._id)"
             >
-              <a href="#">
+              <div>
                 <img :src="item.imagelink" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
-                <a href="#">{{ item.moviename }}</a>
+                <a href="">{{ item.moviename }}</a>
               </h3>
               <h3 class="en-name">
-                <a href="#">{{ item.moviename }}</a>
+                <a href="">{{ item.moviename }}</a>
               </h3>
             </div>
 
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -120,9 +120,9 @@
               </h3>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -131,9 +131,9 @@
               </h3>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -142,9 +142,9 @@
               </h3>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -153,9 +153,9 @@
               </h3>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -164,9 +164,9 @@
               </h3>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -175,9 +175,9 @@
               </h3>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -186,9 +186,9 @@
               </h3>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <a href="#">
+              <div>
                 <img src="../assets/img/img-movie.jpg" alt="" />
-              </a>
+              </div>
               <h3 class="vn-name">
                 <a href="#">Tiếng việt</a>
               </h3>
@@ -200,7 +200,6 @@
         </div>
       </div>
       <paginate
-        style="margin-top: 2rem"
         :page-count="10"
         :page-range="3"
         :margin-pages="2"
@@ -232,12 +231,12 @@ export default {
     };
   },
   created() {
-    this.loadMovie();
+    this.loadMovies();
   },
   computed: {
     /**
      * Hàm tính toán isShow khi isShow ở store thay đổi
-     * Author: DTSAng(19/09)
+     * Author: DTSang(19/09)
      */
     isShow() {
       return this.$store.state.isShow;
@@ -248,16 +247,15 @@ export default {
      * Hàm call dữ liệu hiện thị danh sách phim
      * Author: DTSang(19/09)
      */
-    loadMovie() {
+    loadMovies() {
       if (this.isShow == true) {
-        // let self = this;
+        let self = this;
         axios
           .get(
             `${process.env.VUE_APP_ROOT_API}/filter?typemovie=${this.typeMovie}&national=${this.nationalMovie}&year=${this.yearMovie}`
           )
           .then((response) => {
-            console.log(response.data);
-            this.listMovie = response.data;
+            self.listMovie = response.data;
           })
           .catch((error) => {
             console.log(error);
@@ -269,8 +267,7 @@ export default {
      * Ạuthor: DTSang(19/09)
      */
     movieOnclick(id) {
-      console.log(id);
-      this.$router.push({ name: "MovieDetail" });
+      this.$router.push({ name: "MovieDetail", params: { id: id } });
     },
     /**
      * Ham bắt sự kiện click các option filter
@@ -293,13 +290,13 @@ export default {
      * Author: DTSang(21/09)
      */
     typeMovie: function () {
-      this.loadMovie();
+      this.loadMovies();
     },
     nationalMovie: function () {
-      this.loadMovie();
+      this.loadMovies();
     },
     yearMovie: function () {
-      this.loadMovie();
+      this.loadMovies();
     },
   },
 };
@@ -307,6 +304,9 @@ export default {
 
 <style>
 @import url("../css/views/Movie.css");
+.pagination {
+  margin-top: 2rem;
+}
 .page-item {
   border: 1px solid #ccc;
   width: 2rem;

@@ -41,6 +41,11 @@
 span{
     margin: 10px;
 }
+.row-reverse{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
 .hover:hover{
     color: #428bca;
     background-color: #365068

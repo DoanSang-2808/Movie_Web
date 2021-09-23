@@ -6,7 +6,7 @@
         <ValidationObserver ref="form">
           <div class="register-form">
             <div class="register-form-user">
-              <p style="margin: 0; text-align: left; display: none">Email</p>
+              <!-- <p style="margin: 0; text-align: left; display: none">Email</p> -->
               <ValidationProvider
                 tag="div"
                 rules="required|email"
@@ -34,9 +34,9 @@
               </ValidationProvider>
             </div>
             <div class="register-form-user">
-              <p style="margin: 0; text-align: left; display: none">
+              <!-- <p style="margin: 0; text-align: left; display: none">
                 Tên người dùng
-              </p>
+              </p> -->
               <ValidationProvider
                 tag="div"
                 rules="required"
@@ -64,7 +64,7 @@
               </ValidationProvider>
             </div>
             <div class="register-form-pass">
-              <p style="margin: 0; text-align: left; display: none">Mật khẩu</p>
+              <!-- <p style="margin: 0; text-align: left; display: none">Mật khẩu</p> -->
               <ValidationProvider
                 tag="div"
                 rules="required"
@@ -91,9 +91,9 @@
               </ValidationProvider>
             </div>
             <div class="register-form-pass">
-              <p style="margin: 0; text-align: left; display: none">
+              <!-- <p style="margin: 0; text-align: left; display: none">
                 Xác nhận mật khẩu
-              </p>
+              </p> -->
               <ValidationProvider
                 tag="div"
                 rules="required"
@@ -176,8 +176,7 @@ export default {
             let self = this;
             axios
               .post(`${process.env.VUE_APP_ROOT_API}/register`, value)
-              .then((response) => {
-                console.log(response.data);
+              .then(() => {
                 self.$toast("Đăng kí thành công", {
                   timeout: 2000,
                 });

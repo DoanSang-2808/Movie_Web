@@ -6,9 +6,9 @@
         <ValidationObserver ref="form">
           <div class="login-form">
             <div class="login-form-user">
-              <p style="margin: 0; text-align: left; display: none">
+              <!-- <p style="margin: 0; text-align: left; display: none">
                 Email hoặc số điện thoại
-              </p>
+              </p> -->
               <ValidationProvider
                 tag="div"
                 rules="required|email"
@@ -35,7 +35,7 @@
               </ValidationProvider>
             </div>
             <div class="login-form-pass">
-              <p style="margin: 0; text-align: left; display: none">Mật khẩu</p>
+              <!-- <p style="margin: 0; text-align: left; display: none">Mật khẩu</p> -->
               <ValidationProvider
                 tag="div"
                 rules="required"
@@ -109,8 +109,7 @@ export default {
           let self = this;
           axios
             .post(`${process.env.VUE_APP_ROOT_API}/login`, value)
-            .then((response) => {
-              console.log(response);
+            .then(() => {
               self.$toast("Đăng nhập thành công", {
                 timeout: 2000,
               });

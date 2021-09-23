@@ -57,14 +57,7 @@
           </div>
         </div>
         <div class="col-6 col-md-2 col-xxl-6">
-          <div
-            class="height100"
-            style="
-              display: flex;
-              flex-direction: row-reverse;
-              align-items: center;
-            "
-          >
+          <div class="height100 row-reverse">
             <router-link to="/login">
               <Button :btnText="hasLogin" />
             </router-link>
