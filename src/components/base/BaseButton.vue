@@ -31,6 +31,8 @@ export default {
         this.$emit("btnRegisterOnclick");
       } else if (this.btnMode == 0) {
         this.$emit("btnLoginOnclick");
+      } else if (this.btnMode == 3) {
+        this.$emit("btnWatchMovieOnclick");
       }
     },
   },

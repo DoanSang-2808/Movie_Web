@@ -6,19 +6,8 @@
     justify-content: center;
     padding: 3rem .8rem;
 }
-.content{
-    /* display: none; */
-    font-weight: 900;
-}
-.hasNotLogin{
-    display: none;
-}
 .content-main{
-    display: none;
     width: 990px;
-}
-.hasLogin{
-    display: block;
 }
 .filter-wrapper{
     width: 100%;

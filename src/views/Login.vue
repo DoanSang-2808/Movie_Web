@@ -89,6 +89,8 @@
 <script>
 import Button from "../components/base/BaseButton.vue";
 import axios from "axios";
+import VueCookies from "vue-cookies";
+
 export default {
   name: "Login",
   components: { Button },
@@ -109,12 +111,24 @@ export default {
           let self = this;
           axios
             .post(`${process.env.VUE_APP_ROOT_API}/login`, value)
-            .then(() => {
+            .then((response) => {
               self.$toast("Đăng nhập thành công", {
                 timeout: 2000,
               });
-              self.$emit("hasLogin", true);
-              self.$router.push({ name: "Movie" });
+              //self.$emit("hasLogin", true);
+              let account = {
+                email: response.data.email,
+                username: response.data.username,
+                id: response.data._id,
+                role: response.data.role,
+                token: response.data.token,
+              };
+              VueCookies.set("Account", account);
+              if (response.data.role == "guest") {
+                self.$router.push({ name: "Movie" });
+              } else {
+                self.$router.push({ name: "MovieCMS" });
+              }
               self.changeIsShow();
             })
             .catch((error) => {
@@ -131,7 +145,7 @@ export default {
      * Ảthor: DTSang(19/09)
      */
     changeIsShow() {
-      this.$store.dispatch("handleChangeIsShow", true);
+      this.$store.dispatch("handleChangeIsShow", VueCookies.isKey("Account"));
     },
   },
 };

@@ -11,15 +11,13 @@ import VueAxios from "vue-axios";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import dotenv from "dotenv";
+import myVideo from "vue-video";
+import VueCookies from "vue-cookies";
 
-dotenv.config();
-
-Object.keys(rules).forEach((rule) => {
-  extend(rule, {
-    ...rules[rule], // copies rule configuration
-    message: messages[rule], // assign message
-  });
-});
+Vue.component("paginate", Paginate);
+const options = {
+  position: "bottom-right",
+};
 // Register it globally
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
@@ -29,16 +27,16 @@ Object.keys(rules).forEach((rule) => {
     message: messages[rule], // assign message
   });
 });
-Vue.component("paginate", Paginate);
 Vue.use(VueAxios, axios);
-const options = {
-  position: "bottom-right",
-};
 Vue.use(Toast, options);
+dotenv.config();
+Vue.use(VueCookies);
+// Vue.$cookies.config("30d", "");
 Vue.config.productionTip = false;
 
 new Vue({
   store,
   router,
+  myVideo,
   render: (h) => h(App),
 }).$mount("#app");

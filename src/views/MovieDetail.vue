@@ -11,12 +11,17 @@
         <div class="movie-detail-main row">
           <div class="col-6 col-md-3" style="z-index: 1">
             <img :src="movieDetail.imagelink" alt="" />
-            <Button btnText="Xem phim" icon="bi bi-play-fill margin-right" />
+            <Button
+              btnText="Xem phim"
+              icon="bi bi-play-fill margin-right"
+              :btnMode="3"
+              @btnWatchMovieOnclick="btnWatchMovieOnclick"
+            />
           </div>
           <div class="col-md-9 main" style="z-index: 1">
             <h1 class="title">{{ movieDetail.moviename }}</h1>
             <h2 class="subtitle">
-              {{ movieDetail.moviename }}<span>({{ movieDetail.year }})</span>
+              {{ movieDetail.movienamevn }}<span>({{ movieDetail.year }})</span>
             </h2>
             <div class="meta">Thời lượng: {{ movieDetail.timeduration }}</div>
             <div class="meta">Rate: 9.6</div>
@@ -42,7 +47,7 @@
                   </tr>
                   <tr>
                     <td class="color-ccc">QUỐC GIA</td>
-                    <td class="fontw-700">Hàm Quốc</td>
+                    <td class="fontw-700">{{ movieDetail.national }}</td>
                   </tr>
                   <tr>
                     <td class="color-ccc">KHỞI CHIẾU</td>
@@ -99,12 +104,17 @@
         <iframe
           width="80%"
           height="80%"
-          src="https://www.youtube.com/embed/htqXL94Rza4"
+          src="https://www.youtube.com/embed/WgU7P6o-GkM"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
+        <!-- <my-video
+          :sources="video.sources"
+          :options="video.options"
+          style="width: 80%; height: 80%"
+        ></my-video> -->
       </div>
     </div>
   </div>
@@ -123,7 +133,7 @@ export default {
       openPlayVideo: false,
     };
   },
-  mounted() {
+  created() {
     this.loadMovie();
   },
   methods: {
@@ -157,6 +167,12 @@ export default {
      */
     exitPlayMovie() {
       this.openPlayVideo = false;
+    },
+    btnWatchMovieOnclick() {
+      this.$router.push({
+        path: `/watchmovie/${this.id}`,
+        params: { src: this.movieDetail.movielink },
+      });
     },
   },
 };
