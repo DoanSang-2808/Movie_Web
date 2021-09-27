@@ -5,7 +5,7 @@
         <div class="col-6 col-md-10 col-xxl-6">
           <div class="container-fluid height100">
             <div class="row height100">
-              <router-link to="/" class="col-12 col-sm-6 col-md-3 center">
+              <router-link to="/movies" class="col-12 col-sm-6 col-md-2 center">
                 <div class="dropdown">
                   <a
                     class="btn dropdown-css"
@@ -41,16 +41,29 @@
                 </div>
                 <img src="../../assets/img/logo-full.png" alt="" class="logo" />
               </router-link>
-              <router-link to="/search" class="col-md-3 center hover hidden">
+              <router-link
+                to="/search"
+                class="col-md-3 center hover hidden"
+                :class="{ isAdmin: isHidden }"
+              >
                 <span><i class="bi bi-search"></i></span>Tìm kiếm
               </router-link>
-              <router-link to="/" class="col-md-2 center hover hidden"
+              <router-link
+                to="/movies"
+                class="col-md-2 center hover hidden"
+                :class="{ isAdmin: isHidden }"
                 >Trang chủ</router-link
               >
-              <router-link to="/about" class="col-md-2 center hover hidden"
+              <router-link
+                to="/about"
+                class="col-md-2 center hover hidden"
+                :class="{ isAdmin: isHidden }"
                 >About</router-link
               >
-              <router-link to="/contact" class="col-md-2 center hover hidden"
+              <router-link
+                to="/contact"
+                class="col-md-2 center hover hidden"
+                :class="{ isAdmin: isHidden }"
                 >Liên hệ</router-link
               >
             </div>
@@ -76,7 +89,9 @@ export default {
     Button,
   },
   data() {
-    return {};
+    return {
+      isHidden: false,
+    };
   },
   computed: {
     /**
@@ -99,5 +114,8 @@ export default {
 a {
   text-decoration: none;
   color: #fff;
+}
+.isAdmin {
+  display: none;
 }
 </style>

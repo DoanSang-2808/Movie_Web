@@ -1,11 +1,6 @@
 <template>
   <div class="movie-wrapper">
-    <div class="content" :class="{ hasNotLogin: isShow }">
-      <h1><b>Các bộ phim lẻ mới nhất, được cập nhật liên tục</b></h1>
-      <h3>Xem ở mọi nơi. Hủy bất kì lúc nào !</h3>
-      <h6>Bạn đã sẵn sàng chưa ?</h6>
-    </div>
-    <div class="content-main" :class="{ hasLogin: isShow }">
+    <div class="content-main">
       <div class="filter-wrapper">
         <div class="container-fluid">
           <div class="row">
@@ -101,99 +96,10 @@
                 <img :src="item.imagelink" alt="" />
               </div>
               <h3 class="vn-name">
-                <a href="">{{ item.moviename }}</a>
+                <a href="">{{ item.movienamevn }}</a>
               </h3>
               <h3 class="en-name">
                 <a href="">{{ item.moviename }}</a>
-              </h3>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
-              </h3>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
-              </h3>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
-              </h3>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
-              </h3>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
-              </h3>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
-              </h3>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
-              </h3>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 item-movie">
-              <div>
-                <img src="../assets/img/img-movie.jpg" alt="" />
-              </div>
-              <h3 class="vn-name">
-                <a href="#">Tiếng việt</a>
-              </h3>
-              <h3 class="en-name">
-                <a href="#">Tiếng anh</a>
               </h3>
             </div>
           </div>
@@ -251,9 +157,15 @@ export default {
       if (this.isShow == true) {
         let self = this;
         axios
-          .get(
-            `${process.env.VUE_APP_ROOT_API}/filter?typemovie=${this.typeMovie}&national=${this.nationalMovie}&year=${this.yearMovie}`
-          )
+          .get(`${process.env.VUE_APP_ROOT_API}/filter`, {
+            params: {
+              pageIndex: 1,
+              pageSize: 8,
+              typemovie: this.typeMovie,
+              national: this.nationalMovie,
+              year: this.yearMovie,
+            },
+          })
           .then((response) => {
             self.listMovie = response.data;
           })
@@ -267,7 +179,7 @@ export default {
      * Ạuthor: DTSang(19/09)
      */
     movieOnclick(id) {
-      this.$router.push({ name: "MovieDetail", params: { id: id } });
+      this.$router.push({ path: `/movies/${id}`, params: { id: id } });
     },
     /**
      * Ham bắt sự kiện click các option filter

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{app : isShow}">
+  <div id="app" :class="{ app: isShow }">
     <TheHeader />
     <TheMain />
     <TheFooter />
@@ -18,10 +18,10 @@ export default {
     TheFooter,
   },
   computed: {
-    isShow(){
+    isShow() {
       return this.$store.state.isShow;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -31,7 +31,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-image: url('assets/img/background-login.jpg');
+  background-image: url("assets/img/background-login.jpg");
   height: 100vh;
   background-color: #05101b;
   color: #fff;
