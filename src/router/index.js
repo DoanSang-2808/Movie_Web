@@ -28,7 +28,7 @@ const routes = [
     },
   },
   {
-    path: "/movie",
+    path: "/movies",
     name: "Movie",
     component: Movie,
     beforeEnter: (to, from, next) => {
@@ -111,7 +111,7 @@ const routes = [
     },
   },
   {
-    path: "/moviedetail/:id",
+    path: "/movies/:id",
     name: "MovieDetail",
     component: MovieDetail,
     props: true,
@@ -125,7 +125,7 @@ const routes = [
     },
   },
   {
-    path: "/watchmovie/:id",
+    path: "/movies/:id/watching",
     name: "WatchMovie",
     component: WatchMovie,
     props: true,

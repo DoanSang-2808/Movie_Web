@@ -157,9 +157,15 @@ export default {
       if (this.isShow == true) {
         let self = this;
         axios
-          .get(
-            `${process.env.VUE_APP_ROOT_API}/filter?typemovie=${this.typeMovie}&national=${this.nationalMovie}&year=${this.yearMovie}`
-          )
+          .get(`${process.env.VUE_APP_ROOT_API}/filter`, {
+            params: {
+              pageIndex: 1,
+              pageSize: 8,
+              typemovie: this.typeMovie,
+              national: this.nationalMovie,
+              year: this.yearMovie,
+            },
+          })
           .then((response) => {
             self.listMovie = response.data;
           })
@@ -173,7 +179,7 @@ export default {
      * Ạuthor: DTSang(19/09)
      */
     movieOnclick(id) {
-      this.$router.push({ path: `/moviedetail/${id}`, params: { id: id } });
+      this.$router.push({ path: `/movies/${id}`, params: { id: id } });
     },
     /**
      * Ham bắt sự kiện click các option filter

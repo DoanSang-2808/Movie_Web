@@ -109,9 +109,15 @@ export default {
     loadMovies() {
       let self = this;
       axios
-        .get(
-          `${process.env.VUE_APP_ROOT_API}/filter?pageIndex=1&pageSize=8&typemovie=${this.typeMovie}&national=${this.nationalMovie}&year=${this.yearMovie}`
-        )
+        .get(`${process.env.VUE_APP_ROOT_API}/filter`, {
+          params: {
+            pageIndex: 1,
+            pageSize: 8,
+            typemovie: this.typeMovie,
+            national: this.nationalMovie,
+            year: this.yearMovie,
+          },
+        })
         .then((response) => {
           self.listMovie = response.data;
         })

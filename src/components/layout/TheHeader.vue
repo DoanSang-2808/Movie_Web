@@ -5,7 +5,7 @@
         <div class="col-6 col-md-10 col-xxl-6">
           <div class="container-fluid height100">
             <div class="row height100">
-              <router-link to="/movie" class="col-12 col-sm-6 col-md-2 center">
+              <router-link to="/movies" class="col-12 col-sm-6 col-md-2 center">
                 <div class="dropdown">
                   <a
                     class="btn dropdown-css"
@@ -49,7 +49,7 @@
                 <span><i class="bi bi-search"></i></span>Tìm kiếm
               </router-link>
               <router-link
-                to="/movie"
+                to="/movies"
                 class="col-md-2 center hover hidden"
                 :class="{ isAdmin: isHidden }"
                 >Trang chủ</router-link

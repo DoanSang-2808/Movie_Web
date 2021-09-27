@@ -170,7 +170,7 @@ export default {
     },
     btnWatchMovieOnclick() {
       this.$router.push({
-        path: `/watchmovie/${this.id}`,
+        path: `/movies/${this.id}/watching`,
         params: { src: this.movieDetail.movielink },
       });
     },
