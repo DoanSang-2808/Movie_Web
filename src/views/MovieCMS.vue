@@ -111,7 +111,7 @@ export default {
       axios
         .get(`${process.env.VUE_APP_ROOT_API}/filter`, {
           params: {
-            pageIndex: 1,
+            // pageIndex: 1,
             pageSize: 8,
             typemovie: this.typeMovie,
             national: this.nationalMovie,
