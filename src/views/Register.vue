@@ -120,11 +120,7 @@
               </ValidationProvider>
             </div>
             <div class="register-form-login">
-              <Button
-                btnText="Đăng kí"
-                :btnMode="1"
-                @btnRegisterOnclick="btnRegisterOnclick"
-              />
+              <Button btnText="Đăng kí" @btnOnclick="btnRegisterOnclick" />
             </div>
             <div class="login-form-option">
               <p>Bạn cần trợ giúp?</p>

@@ -18,16 +18,20 @@
         </div>
         <div class="col-10 col-xl-10 content">
           <div class="content-title">
-            <h1 class="title">Quản lí phim</h1>
-            <Button btnText="Thêm phim mới" :btnMode="4" icon="bi bi-plus-lg" />
+            <h1 class="title"></h1>
+            <Button
+              btnText="Thêm phim mới"
+              icon="bi bi-plus-lg"
+              @btnOnclick="btnAddMovieOnclick"
+            />
           </div>
           <div class="content-main">
             <div class="main-search">
               <div class="main-search-left col-6 col-md-4">
                 <i class="bi bi-search"></i>
-                <InputField />
+                <InputField @changeInput="findMovie" ref="input" />
               </div>
-              <div class="main-search-right">
+              <div class="main-search-right" @click="reloadMovies">
                 <i class="bi bi-arrow-clockwise"></i>
               </div>
             </div>
@@ -37,8 +41,8 @@
                 <table>
                   <tr>
                     <th width="150px;" min-width="100px;">Tên phim</th>
-                    <th width="50px;">Năm</th>
-                    <th width="100px;">Thời lượng</th>
+                    <th width="70px;">Năm</th>
+                    <th width="120px;">Thời lượng</th>
                     <th width="100px;">Quốc gia</th>
                     <th width="150px;">Thể loại</th>
                     <th width="100px;">Đạo diễn</th>
@@ -48,7 +52,7 @@
                   </tr>
                   <tbody>
                     <tr v-for="item of listMovie" :key="item.id">
-                      <td :title="item.movienamevn">{{ item.movienamevn }}</td>
+                      <td :title="item.moviename">{{ item.moviename }}</td>
                       <td :title="item.year">{{ item.year }}</td>
                       <td :title="item.timeduration">
                         {{ item.timeduration }}
@@ -61,9 +65,14 @@
                       <td class="no-border-r">
                         <i
                           class="bi bi-pencil-square edit"
-                          title="Sử thông tin phim"
+                          title="Sửa thông tin phim"
+                          @click="btnEditMovieOnclick(item._id)"
                         ></i>
-                        <i class="bi bi-trash delete" title="Xóa phim"></i>
+                        <i
+                          class="bi bi-trash delete"
+                          title="Xóa phim"
+                          @click="btnDeleteMovieOnclick(item._id)"
+                        ></i>
                       </td>
                     </tr>
                   </tbody>
@@ -74,7 +83,12 @@
         </div>
       </div>
     </div>
-    <ModalForm />
+    <ModalForm
+      ref="modalForm"
+      @closeModalForm="closeModalForm"
+      @reload="reloadMovies"
+    />
+    <div class="cms-over" :class="{ 'show-over': isShow }"></div>
   </div>
 </template>
 
@@ -96,6 +110,10 @@ export default {
       typeMovie: "",
       nationalMovie: "",
       yearMovie: "",
+      isShow: false,
+      movie: {},
+      formMode: "",
+      keyword: "",
     };
   },
   created() {
@@ -111,7 +129,7 @@ export default {
       axios
         .get(`${process.env.VUE_APP_ROOT_API}/filter`, {
           params: {
-            // pageIndex: 1,
+            pageIndex: 1,
             pageSize: 8,
             typemovie: this.typeMovie,
             national: this.nationalMovie,
@@ -125,6 +143,113 @@ export default {
           console.log(error);
         });
     },
+    /**
+     * Hàm xử lí sự kiện bấm nút thêm phim mới
+     * Author: DTSang(27/09)
+     */
+    btnAddMovieOnclick() {
+      this.movie = {
+        typemovie: [],
+        actors: [],
+      };
+      this.formMode = 0;
+      this.isShow = true;
+    },
+    /**
+     * Hàm xử lí sự kiện đóng cms-over khi đóng modal
+     * Author: DTSang(27/09)
+     */
+    closeModalForm() {
+      this.movie = {};
+      this.isShow = false;
+    },
+    /**
+     * Hàm lấy về thoogn tin bộ phim theo id
+     * Author: DTSang(27/09)
+     */
+    getMovieById(id) {
+      return new Promise((res) => {
+        axios
+          .get(`${process.env.VUE_APP_ROOT_API}/getmovie/${id}`)
+          .then((response) => {
+            res(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    },
+    /**
+     * Hàm xử lí sự kiện khi bấm vào nút edit phim
+     * Author: DTSang(27/09)
+     */
+    async btnEditMovieOnclick(id) {
+      this.movie = await this.getMovieById(id);
+      this.formMode = 1;
+      this.isShow = true;
+    },
+    /**
+     * Hàm xử lí sự kiện khi bấm nút xóa
+     * Author: DTSang(28/09)
+     */
+    async btnDeleteMovieOnclick(id) {
+      this.movie = await this.getMovieById(id);
+      if (
+        confirm("Bạn có muốn xóa phim " + this.movie.moviename + " hay không ?")
+      ) {
+        axios
+          .post(`${process.env.VUE_APP_ROOT_API}/deletemovie/${id}`, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "Access-Control-Allow-Origin": "*",
+              token: this.token, // eslint-disable-line
+            },
+          })
+          .then((response) => {
+            self.$toast(response.data.message, {
+              timeout: 2000,
+            });
+            self.$emit("reload");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+    /**
+     * Hàm xử lí sự kiện bấm vào nút reload
+     * Author: DTSang(28/09)
+     */
+    reloadMovies() {
+      this.loadMovies();
+      this.$refs.input.reset();
+    },
+    /**
+     * Tìm kiếm phimg theo key word
+     * Author: DTSang(28/09)
+     */
+    findMovie(data) {
+      let self = this;
+      axios
+        .get(`${process.env.VUE_APP_ROOT_API}/findmovie?key=${data[1]}`)
+        .then((response) => {
+          self.listMovie = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  watch: {
+    /**
+     * Lắng nghe sự thay đổi của isShow
+     * Author: DTSang(27/09)
+     */
+    isShow: function () {
+      if (this.isShow == true) {
+        this.$refs.modalForm.showModalForm(this.movie, this.formMode);
+      }
+    },
   },
 };
 </script>
@@ -133,6 +258,7 @@ export default {
 .wrapper-cms {
   width: 100%;
   height: calc(100vh - 56px);
+  position: relative;
 }
 .row > * {
   padding: 0 !important;
@@ -271,5 +397,18 @@ table tbody tr td .delete:hover {
 #scroll::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #f5f5f5;
+}
+.cms-over {
+  position: absolute;
+  width: 100vw;
+  height: calc(100vh - 56px);
+  background: #000;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.show-over {
+  display: block;
 }
 </style>

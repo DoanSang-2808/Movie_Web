@@ -83,6 +83,7 @@
 
 <script>
 import Button from "../base/BaseButton.vue";
+import VueCookies from "vue-cookies";
 export default {
   name: "TheHeader",
   components: {
@@ -90,7 +91,7 @@ export default {
   },
   data() {
     return {
-      isHidden: false,
+      isHidden: VueCookies.get("Account").role == "admin",
     };
   },
   computed: {
@@ -116,6 +117,6 @@ a {
   color: #fff;
 }
 .isAdmin {
-  display: none;
+  display: none !important;
 }
 </style>

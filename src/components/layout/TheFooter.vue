@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-wrapper">
+  <div class="footer-wrapper" :class="{ hidden: isHidden }">
     <div class="up-footer"></div>
     <div class="footer">
       <p style="margin-bottom: 50px">Bạn có câu hỏi? Liên hệ chúng tôi.</p>
@@ -35,11 +35,20 @@
 </template>
 
 <script>
+import VueCookies from "vue-cookies";
 export default {
   name: "TheFooter",
+  data() {
+    return {
+      isHidden: VueCookies.get("Account").role == "admin",
+    };
+  },
 };
 </script>
 
 <style scoped>
 @import url("../../css/layout/TheFooter.css");
+.hidden {
+  display: none;
+}
 </style>
