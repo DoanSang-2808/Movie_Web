@@ -62,11 +62,7 @@
               </ValidationProvider>
             </div>
             <div class="login-form-login">
-              <Button
-                btnText="Đăng nhập"
-                :btnMode="0"
-                @btnLoginOnclick="btnLoginOnclick"
-              />
+              <Button btnText="Đăng nhập" @btnOnclick="btnLoginOnclick" />
             </div>
             <div class="login-form-option">
               <div style="display: flex">

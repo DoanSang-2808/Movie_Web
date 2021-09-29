@@ -19,7 +19,7 @@ const routes = [
     name: "Home",
     component: Home,
     beforeEnter: (to, from, next) => {
-      if (!VueCookies.get("Account")) next();
+      if (!VueCookies.isKey("Account")) next();
       else if (VueCookies.get("Account").role == "guest") {
         next({ name: "Movie" });
       } else {
@@ -56,7 +56,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (VueCookies.isKey("Account") == false) next();
       else {
-        next({ name: "Movie" });
+        next({ name: "Home" });
       }
     },
   },

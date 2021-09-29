@@ -14,9 +14,6 @@ export default {
     btnText: {
       type: String,
     },
-    btnMode: {
-      type: Number,
-    },
     icon: {
       type: String,
     },
@@ -27,13 +24,7 @@ export default {
      * Author: DTSang(18/09)
      */
     btnOnclick() {
-      if (this.btnMode == 1) {
-        this.$emit("btnRegisterOnclick");
-      } else if (this.btnMode == 0) {
-        this.$emit("btnLoginOnclick");
-      } else if (this.btnMode == 3) {
-        this.$emit("btnWatchMovieOnclick");
-      }
+      this.$emit("btnOnclick");
     },
   },
 };
