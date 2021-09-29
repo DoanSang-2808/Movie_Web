@@ -31,11 +31,7 @@ export default {
       this.valueInput = this.value;
     },
     valueArray: function () {
-      let arr = "";
-      for (const element of this.valueArray) {
-        arr = arr + element + ",";
-      }
-      this.valueInput = arr.slice(0, -1);
+      this.valueInput = this.valueArray.join(",");
     },
     /**
      * Lắng nghe sự thay đổi của valueInput

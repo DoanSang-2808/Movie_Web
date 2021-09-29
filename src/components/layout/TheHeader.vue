@@ -71,9 +71,9 @@
         </div>
         <div class="col-6 col-md-2 col-xxl-6">
           <div class="height100 row-reverse">
-            <router-link to="/login">
-              <Button :btnText="hasLogin" />
-            </router-link>
+            <div to="/login">
+              <Button :btnText="hasLogin" @btnOnclick="btnLogoutOnclick" />
+            </div>
           </div>
         </div>
       </div>
@@ -106,7 +106,28 @@ export default {
       return "Đăng nhập";
     },
   },
-  methods: {},
+  methods: {
+    /**
+     * Hàm sự lí sự kiện bấm vào nút Logout
+     * Author: DTSang(29/09)
+     */
+    btnLogoutOnclick() {
+      if (VueCookies.isKey("Account") == true) {
+        VueCookies.remove("Account");
+        this.changeIsShow();
+        this.$router.push({ name: "Home" });
+      } else {
+        this.$router.push({ name: "Login" });
+      }
+    },
+    /**
+     * Hàm thay dổi giá trị của isShow trong store
+     * Ảthor: DTSang(19/09)
+     */
+    changeIsShow() {
+      this.$store.dispatch("handleChangeIsShow", VueCookies.isKey("Account"));
+    },
+  },
 };
 </script>
 
