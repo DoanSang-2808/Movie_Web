@@ -129,15 +129,15 @@ export default {
       axios
         .get(`${process.env.VUE_APP_ROOT_API}/filter`, {
           params: {
-            pageIndex: 1,
-            pageSize: 8,
+            pageIndex: "",
+            pageSize: "",
             typemovie: this.typeMovie,
             national: this.nationalMovie,
             year: this.yearMovie,
           },
         })
         .then((response) => {
-          self.listMovie = response.data;
+          self.listMovie = response.data.movies;
         })
         .catch((error) => {
           console.log(error);

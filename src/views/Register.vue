@@ -23,7 +23,7 @@
                     type="text"
                     name="email"
                     placeholder="Nhập email"
-                    autocomplete="on"
+                    autocomplete="off"
                     v-model="account.email"
                   />
                   <i
@@ -53,8 +53,8 @@
                     type="text"
                     name="username"
                     placeholder="Nhập username"
-                    autocomplete="on"
                     v-model="account.username"
+                    autocomplete="off"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -82,6 +82,7 @@
                     name="password"
                     placeholder="Mật khẩu"
                     v-model="account.password"
+                    autocomplete="off"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -111,6 +112,7 @@
                     name="passwordComfirm"
                     placeholder="Xác nhận mật khẩu"
                     v-model="passwordComfirm"
+                    autocomplete="off"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -188,6 +190,9 @@ export default {
               })
               .catch((error) => {
                 console.log(error);
+                self.$toast(error.response.data.notification, {
+                  timeout: 2000,
+                });
               });
           }
         }

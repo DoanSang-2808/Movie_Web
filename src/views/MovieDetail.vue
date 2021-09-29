@@ -14,8 +14,7 @@
             <Button
               btnText="Xem phim"
               icon="bi bi-play-fill margin-right"
-              :btnMode="3"
-              @btnWatchMovieOnclick="btnWatchMovieOnclick"
+              @btnOnclick="btnWatchMovieOnclick()"
             />
           </div>
           <div class="col-md-9 main" style="z-index: 1">
@@ -24,7 +23,7 @@
               {{ movieDetail.movienamevn }}<span>({{ movieDetail.year }})</span>
             </h2>
             <div class="meta">Thời lượng: {{ movieDetail.timeduration }}</div>
-            <div class="meta">Rate: 9.6</div>
+            <div class="meta">Rate: {{ this.rateMovie }}</div>
             <div class="movie-type">
               <div
                 class="item-type-movie"
@@ -39,7 +38,7 @@
                 <tbody>
                   <tr>
                     <td class="color-ccc">ĐẠO DIỄN</td>
-                    <td class="fontw-700">Han Kwwang-Il</td>
+                    <td class="fontw-700">{{ movieDetail.director }}</td>
                   </tr>
                   <tr>
                     <td class="color-ccc">KỊCH BẢN</td>
@@ -104,17 +103,12 @@
         <iframe
           width="80%"
           height="80%"
-          src="https://www.youtube.com/embed/WgU7P6o-GkM"
+          :src="trailerlink"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
-        <!-- <my-video
-          :sources="video.sources"
-          :options="video.options"
-          style="width: 80%; height: 80%"
-        ></my-video> -->
       </div>
     </div>
   </div>
@@ -130,11 +124,14 @@ export default {
   data() {
     return {
       movieDetail: new Object(),
+      rateMovie: "0",
+      trailerlink: "https://www.youtube.com/embed/",
       openPlayVideo: false,
     };
   },
   created() {
     this.loadMovie();
+    this.loadRateMovie();
   },
   methods: {
     /**
@@ -148,6 +145,7 @@ export default {
           .get(`${process.env.VUE_APP_ROOT_API}/getmovie/${this.id}`)
           .then((response) => {
             self.movieDetail = response.data;
+            self.trailerlink += response.data.trailerlink;
           })
           .catch((error) => {
             console.log(error);
@@ -168,11 +166,39 @@ export default {
     exitPlayMovie() {
       this.openPlayVideo = false;
     },
+    /**
+     * Hàm xử sự kiện bấm vào nút xem phim
+     * Author: DTSang(27/09)
+     */
     btnWatchMovieOnclick() {
+      this.routeWatchMovie();
+    },
+    /**
+     * Hàm điều hướng khi bấm vào nút xem phím
+     * Author: DTSang(29/09)
+     */
+    routeWatchMovie() {
       this.$router.push({
         path: `/movies/${this.id}/watching`,
-        params: { src: this.movieDetail.movielink },
+        params: { id: this.id },
       });
+    },
+    /**
+     * Hàm load đánh giá của phim
+     * Author: DTSang(29/09)
+     */
+    loadRateMovie() {
+      let self = this;
+      if (this.id !== undefined) {
+        axios
+          .get(`${process.env.VUE_APP_ROOT_API}/getrateavgbymovie/${this.id}`)
+          .then((response) => {
+            self.rateMovie = response.data.avg;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
 };

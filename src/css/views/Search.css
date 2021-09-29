@@ -1,6 +1,6 @@
 .search-wrapper{
     width: 100%;
-    min-height: 300px;
+    min-height: 500px;
     padding: 2rem 3rem ;
 }
 .search-wrapper .input{
@@ -10,8 +10,8 @@
     
 }
 .search-wrapper .input input{
-    background-color: #fff !important;
-    color: #000 !important;
+    background-color: #000 !important;
+    color: #fff !important;
     width: 100%;
 }
 ::placeholder{

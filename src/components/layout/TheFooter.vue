@@ -40,7 +40,10 @@ export default {
   name: "TheFooter",
   data() {
     return {
-      isHidden: VueCookies.get("Account").role == "admin",
+      isHidden:
+        VueCookies.isKey("Account") == false
+          ? false
+          : VueCookies.get("Account").role == "admin",
     };
   },
 };

@@ -51,7 +51,7 @@
 .movie-detail-main .meta{
     text-align: left;
     font-size: 20px;
-    margin-top: 1rem;
+    margin: 1rem 0;
     font-weight: 700;
 }
 .movie-type{

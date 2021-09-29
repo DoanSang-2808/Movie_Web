@@ -26,6 +26,7 @@
                     name="email"
                     placeholder="Email hoặc số điện thoại"
                     v-model="account.email"
+                    autocomplete="off"
                   />
                   <i
                     class="bi bi-exclamation-circle"
@@ -53,6 +54,7 @@
                     name="password"
                     placeholder="Mật khẩu"
                     v-model="account.password"
+                    autocomplete="off"
                   />
                   <i
                     class="bi bi-exclamation-circle"

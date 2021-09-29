@@ -13,6 +13,7 @@ import "vue-toastification/dist/index.css";
 import dotenv from "dotenv";
 import myVideo from "vue-video";
 import VueCookies from "vue-cookies";
+import VueFacebook from "vue-facebook";
 
 Vue.component("paginate", Paginate);
 const options = {
@@ -32,6 +33,7 @@ Vue.use(Toast, options);
 dotenv.config();
 Vue.use(VueCookies);
 // Vue.$cookies.config("30d", "");
+Vue.use(VueFacebook);
 Vue.config.productionTip = false;
 
 new Vue({
