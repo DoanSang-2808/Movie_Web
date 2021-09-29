@@ -7,22 +7,24 @@
           :options="video.options"
           style="width: 100%; height: 100%"
         ></my-video>
-        <h1 class="name-movie">Ký sinh trùng</h1>
-        <h3 class="sub-mane-movie">Parasise<span>(2021)</span></h3>
+        <h1 class="name-movie">{{ movie.movienamevn }}</h1>
+        <h3 class="sub-mane-movie">
+          {{ movie.moviename }}<span>({{ movie.year }})</span>
+        </h3>
         <div class="description-movie">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-          accusamus sed perferendis fugiat? Adipisci aliquid cum veniam numquam
-          quisquam corporis, in incidunt placeat ipsam possimus id magnam, ab
-          recusandae. Dolorum. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Sint doloribus delectus doloremque porro explicabo
-          quos nisi ullam tempore, aliquid soluta libero dicta. Explicabo at,
-          sed molestias aut a accusamus velit.
+          {{ movie.description }}
         </div>
       </div>
     </div>
     <div class="comment-wrapper">
       <div class="comment">
-        <div class="title-comment">
+        <div
+          class="fb-comments"
+          data-href="http://localhost:8081"
+          data-width="100%"
+          data-numposts="10"
+        ></div>
+        <!-- <div class="title-comment">
           <b>288 bình luận</b>
         </div>
         <hr />
@@ -41,11 +43,11 @@
               </div>
               <div class="comment-main">
                 Phim hay lắm =)))) bao giờ ra phần 2 nhỉ ???
-                <span>28/08/2021</span>
+                <span>28/08/2000</span>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -53,31 +55,60 @@
 
 <script>
 import myVideo from "vue-video";
+import axios from "axios";
 export default {
   name: "WatchMovie",
   components: { myVideo },
-  props: ["src"],
+  props: ["id"],
   data() {
     return {
-      video: {
-        sources: [
-          {
-            src: "https://www.googleapis.com/drive/v3/files/12H41M5wQQAVOS4bZ7QfIEv-SWGbf81rh?key=AIzaSyAR2pX0DsiQXppxQnq4N_qWxg1ND6D6wjQ&alt=media",
-            type: "video/mp4",
-          },
-        ],
-        options: {
-          // autoplay: true,
-        },
-      },
+      video: {},
+      movie: new Object(),
+      host: process.env.VUE_APP_ROOT_API,
     };
+  },
+  created() {
+    this.loadMovie();
+  },
+  mounted() {
+    window.FB.XFBML.parse();
+  },
+  methods: {
+    /**
+     * Hàm lấy dữ liệu của 1 phim
+     * Author: DTSang(23/09)
+     */
+    loadMovie() {
+      let self = this;
+      if (this.id !== undefined) {
+        axios
+          .get(`${process.env.VUE_APP_ROOT_API}/getmovie/${this.id}`)
+          .then((response) => {
+            self.movie = response.data;
+            self.video = {
+              sources: [
+                {
+                  src: response.data.movielink,
+                  type: "video/mp4",
+                },
+              ],
+              options: {
+                // autoplay: true,
+              },
+            };
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
 .watch-movie-wrapper {
-  width: 100vw;
+  width: 100%;
   height: max-content;
   display: flex;
   justify-content: center;
@@ -120,7 +151,7 @@ export default {
   color: #ccc;
 }
 .comment-wrapper {
-  width: 100vw;
+  width: 100%;
   height: max-content;
   display: flex;
   justify-content: center;

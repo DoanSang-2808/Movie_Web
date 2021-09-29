@@ -19,7 +19,7 @@ const routes = [
     name: "Home",
     component: Home,
     beforeEnter: (to, from, next) => {
-      if (!VueCookies.isKey("Account")) next();
+      if (VueCookies.isKey("Account") == false) next();
       else if (VueCookies.get("Account").role == "guest") {
         next({ name: "Movie" });
       } else {
@@ -32,7 +32,11 @@ const routes = [
     name: "Movie",
     component: Movie,
     beforeEnter: (to, from, next) => {
-      if (VueCookies.get("Account").role == "guest") next();
+      if (
+        VueCookies.isKey("Account") == true &&
+        VueCookies.get("Account").role == "guest"
+      )
+        next();
       else {
         next(false);
       }
@@ -43,7 +47,11 @@ const routes = [
     name: "MovieCMS",
     component: MovieCMS,
     beforeEnter: (to, from, next) => {
-      if (VueCookies.get("Account").role == "admin") next();
+      if (
+        VueCookies.isKey("Account") == true &&
+        VueCookies.get("Account").role == "admin"
+      )
+        next();
       else {
         next(false);
       }
@@ -54,9 +62,9 @@ const routes = [
     name: "Login",
     component: Login,
     beforeEnter: (to, from, next) => {
-      if (VueCookies.isKey("Account") == false) next();
+      if (VueCookies.isKey("Account") == false && from.name !== "Login") next();
       else {
-        next({ name: "Home" });
+        next(false);
       }
     },
   },
@@ -77,9 +85,9 @@ const routes = [
     component: Search,
     beforeEnter: (to, from, next) => {
       if (VueCookies.get("Account").role == "guest") next();
-      else if (VueCookies.ge("Account").role == "admin") {
+      else if (VueCookies.get("Account").role == "admin") {
         next(false);
-      } else {
+      } else if (VueCookies.isKey("Account") == false) {
         next({ name: "Login" });
       }
     },
@@ -90,9 +98,9 @@ const routes = [
     component: About,
     beforeEnter: (to, from, next) => {
       if (VueCookies.get("Account").role == "guest") next();
-      else if (VueCookies.ge("Account").role == "admin") {
+      else if (VueCookies.get("Account").role == "admin") {
         next(false);
-      } else {
+      } else if (VueCookies.isKey("Account") == false) {
         next({ name: "Login" });
       }
     },
@@ -103,9 +111,9 @@ const routes = [
     component: Contact,
     beforeEnter: (to, from, next) => {
       if (VueCookies.get("Account").role == "guest") next();
-      else if (VueCookies.ge("Account").role == "admin") {
+      else if (VueCookies.get("Account").role == "admin") {
         next(false);
-      } else {
+      } else if (VueCookies.isKey("Account") == false) {
         next({ name: "Login" });
       }
     },
@@ -117,9 +125,9 @@ const routes = [
     props: true,
     beforeEnter: (to, from, next) => {
       if (VueCookies.get("Account").role == "guest") next();
-      else if (VueCookies.ge("Account").role == "admin") {
+      else if (VueCookies.get("Account").role == "admin") {
         next(false);
-      } else {
+      } else if (VueCookies.isKey("Account") == false) {
         next({ name: "Login" });
       }
     },
@@ -131,9 +139,9 @@ const routes = [
     props: true,
     beforeEnter: (to, from, next) => {
       if (VueCookies.get("Account").role == "guest") next();
-      else if (VueCookies.ge("Account").role == "admin") {
+      else if (VueCookies.get("Account").role == "admin") {
         next(false);
-      } else {
+      } else if (VueCookies.isKey("Account") == false) {
         next({ name: "Login" });
       }
     },

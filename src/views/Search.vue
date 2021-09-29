@@ -28,7 +28,7 @@
               <img :src="item.imagelink" alt="" />
             </div>
             <h3 class="vn-name">
-              <a href="">{{ item.moviename }}</a>
+              <a href="">{{ item.movienamevn }}</a>
             </h3>
             <h3 class="en-name">
               <a href="">{{ item.moviename }}</a>

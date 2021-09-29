@@ -11,10 +11,12 @@
                   <div class="select" @click="optionFilterTypeOnclick">
                     <select class="select-css">
                       <option selected value>- Tất cả -</option>
-                      <option value="Tình Cảm">Tình cảm</option>
-                      <option value="Hành động">Hành động</option>
-                      <option value="khoa học viễn tưởng">
-                        Khoa học viễn tưởng
+                      <option
+                        v-for="item of this.typeMovieList"
+                        :key="item.id"
+                        :value="item"
+                      >
+                        {{ item }}
                       </option>
                     </select>
                   </div>
@@ -28,14 +30,13 @@
                   <div class="select" @click="optionFilterNationalOnclick">
                     <select class="select-css">
                       <option selected value>- Tất cả -</option>
-                      <option value="Mỹ">Mỹ</option>
-                      <option value="Hàn Quốc">Hàn Quốc</option>
-                      <option value="Trung Quốc">Trung Quốc</option>
-                      <option value="Thái Lan">Thái Lan</option>
-                      <option value="Pháp">Pháp</option>
-                      <option value="Nga">Nga</option>
-                      <option value="Việt Nam">Việt Nam</option>
-                      <option value="Đài Loan">Đài loan</option>
+                      <option
+                        v-for="item of this.nationalList"
+                        :key="item.id"
+                        :value="item"
+                      >
+                        {{ item }}
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -105,12 +106,16 @@
           </div>
         </div>
       </div>
+      <!-- <div class="total-movie">
+        Tổng số: <span>{{ this.totalMovie }}</span> phim.
+      </div> -->
       <paginate
-        :page-count="10"
+        :page-count="this.totalPage"
         :page-range="3"
         :margin-pages="2"
         :prev-text="'Trang trước'"
         :next-text="'Trang sau'"
+        :click-handler="clickPage"
         :container-class="'pagination'"
         :page-class="'page-item'"
         :page-link-class="'page-link-item'"
@@ -131,13 +136,20 @@ export default {
   data() {
     return {
       listMovie: [],
+      totalMovie: "",
+      totalPage: 1,
       typeMovie: "",
       nationalMovie: "",
       yearMovie: "",
+      pageIndex: "",
+      typeMovieList: "",
+      nationalList: "",
     };
   },
   created() {
     this.loadMovies();
+    this.getTypeMovieList();
+    this.getNationalList();
   },
   computed: {
     /**
@@ -159,7 +171,7 @@ export default {
         axios
           .get(`${process.env.VUE_APP_ROOT_API}/filter`, {
             params: {
-              pageIndex: 1,
+              pageIndex: this.pageIndex,
               pageSize: 8,
               typemovie: this.typeMovie,
               national: this.nationalMovie,
@@ -167,7 +179,9 @@ export default {
             },
           })
           .then((response) => {
-            self.listMovie = response.data;
+            self.totalMovie = response.data.totalMovie;
+            self.totalPage = response.data.totalPage;
+            self.listMovie = response.data.movies;
           })
           .catch((error) => {
             console.log(error);
@@ -182,7 +196,7 @@ export default {
       this.$router.push({ path: `/movies/${id}`, params: { id: id } });
     },
     /**
-     * Ham bắt sự kiện click các option filter
+     * Hàm bắt sự kiện click các option filter
      * Author: DTSang(20/09/2021)
      */
     optionFilterTypeOnclick() {
@@ -194,6 +208,40 @@ export default {
     },
     optionFilterYearOnclick() {
       this.yearMovie = event.target.options[event.target.selectedIndex].value;
+    },
+    /**
+     * Hàm gọi danh sách các quốc gia và thể loại
+     * Author: DTSang(29/09)
+     */
+    getTypeMovieList() {
+      let self = this;
+      axios
+        .get(`${process.env.VUE_APP_ROOT_API}/gettypemovie`)
+        .then((response) => {
+          self.typeMovieList = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getNationalList() {
+      let self = this;
+      axios
+        .get(`${process.env.VUE_APP_ROOT_API}/getnationalmovie`)
+        .then((response) => {
+          self.nationalList = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    /**
+     * Hàm xử lí sụ kiện khi bấm chuyển trang
+     * Author: DTsang(29/09)
+     */
+    clickPage(pageNum) {
+      this.pageIndex = pageNum;
+      this.loadMovies();
     },
   },
   watch: {
@@ -216,6 +264,14 @@ export default {
 
 <style>
 @import url("../css/views/Movie.css");
+.total-movie {
+  text-align: left;
+  margin-top: 2rem;
+  font-size: 25px;
+}
+.total-movie span {
+  color: #cf2122;
+}
 .pagination {
   margin-top: 2rem;
 }

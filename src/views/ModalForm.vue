@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div class="col-12 col-md-6 wrapper-field-label">
-                <label>Tên phim (EN)</label>
+                <label>Tên phim (EN)(<span class="required">*</span>)</label>
                 <div class="input-label">
                   <InputField
                     :value="movie.moviename"
@@ -113,7 +113,7 @@
                 </div>
               </div>
               <div class="col-12 col-md-6 wrapper-field-label">
-                <label>Link phim</label>
+                <label>Link phim(<span class="required">*</span>)</label>
                 <div class="input-label">
                   <InputField
                     :value="movie.movielink"
@@ -123,7 +123,7 @@
                 </div>
               </div>
               <div class="col-12 col-md-6 wrapper-field-label">
-                <label>Link trailer</label>
+                <label>Link trailer(<span class="required">*</span>)</label>
                 <div class="input-label">
                   <InputField
                     :value="movie.trailerlink"
@@ -133,7 +133,7 @@
                 </div>
               </div>
               <div class="col-12 wrapper-field-label">
-                <label>Ảnh đại diện</label>
+                <label>Ảnh đại diện(<span class="required">*</span>)</label>
                 <div class="input-file">
                   <InputFile
                     :value="movie.imagelink"
@@ -144,7 +144,7 @@
                 </div>
               </div>
               <div class="col-12 wrapper-field-label">
-                <label>Ảnh bìa</label>
+                <label>Ảnh bìa(<span class="required">*</span>)</label>
                 <div class="input-file">
                   <InputFile
                     :value="movie.imagebackgroundlink"
@@ -472,5 +472,9 @@ img {
 }
 .checkbox {
   padding-right: 0 !important;
+}
+.required {
+  color: red;
+  margin: 0;
 }
 </style>
